@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="robots" content="none">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>browser window dimensions</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        background: #000;
+      }
+
+      body {
+        font: 1.2rem/1.5 X-LocaleSpecific, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+      }
+
+      .measure {
+        --measure-size: calc(5vw + 5vh);
+        opacity: .85;
+        position: absolute;
+      }
+
+      .measure:after {
+        color: #111;
+        content: attr(data-label);
+        font-size: 1.5rem;
+        line-height: var(--measure-size);
+        padding: 3px;
+      }
+
+      .measure-width {
+        background: lightgreen;
+        height: var(--measure-size);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding-right: 2vw;
+        text-align: right;
+        width: 100%;
+      }
+
+      .measure-height {
+        background: lightblue;
+        height: 100%;
+        bottom: 0;
+        text-align: center;
+        top: 0;
+        width: var(--measure-size);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="measure measure-width" id="measure-width">
+    </div>
+    <div class="measure measure-height" id="measure-height">
+    </div>
+    <script>
+      (function () {
+        var measureWidthEl = document.getElementById('measure-width');
+        var measureHeightEl = document.getElementById('measure-height');
+
+        function calc () {
+          measureWidthEl.setAttribute('data-label', window.innerWidth);
+          measureHeightEl.setAttribute('data-label', window.innerHeight);
+        }
+
+        window.onresize = calc;
+        calc();
+      })();
+    </script>
+  </body>
+</html>
